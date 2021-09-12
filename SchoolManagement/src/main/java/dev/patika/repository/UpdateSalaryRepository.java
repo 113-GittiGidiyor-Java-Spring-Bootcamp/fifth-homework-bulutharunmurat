@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface UpdateSalaryRepository extends PagingAndSortingRepository<InstructorSalaryUpdateLogger, Long> {
 
-    @Query("SELECT i FROM InstructorSalaryUpdateLogger i WHERE i.id=?1")
-    Page<List<InstructorSalaryUpdateLogger>> findByIdWithPage(long id, Pageable pageable);
+    @Query("SELECT i FROM InstructorSalaryUpdateLogger i WHERE i.InstructorId=?1")
+    Page<List<InstructorSalaryUpdateLogger>> findByIdWithPage(int id, Pageable pageable);
 }

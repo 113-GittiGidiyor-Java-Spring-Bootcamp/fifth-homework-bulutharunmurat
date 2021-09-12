@@ -165,6 +165,6 @@ public class InstructorService implements BaseService<Instructor>{
     }
 
     public Page<List<InstructorSalaryUpdateLogger>> getAllTransactionsById(int id, Pageable pageable) {
-        return updateSalaryRepository.findByIdWithPage((long) id, pageable);
+        return updateSalaryRepository.findByIdWithPage(id, pageable);
     }
 }
