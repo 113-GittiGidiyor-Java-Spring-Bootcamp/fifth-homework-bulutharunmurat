@@ -1517,3 +1517,6 @@ java.lang.IllegalArgumentException: Parameter value [7] did not match expected t
 2021-09-12 18:00:18.502  INFO 18532 --- [RMI TCP Connection(2)-192.168.1.33] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2021-09-12 18:00:18.503  INFO 18532 --- [RMI TCP Connection(2)-192.168.1.33] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2021-09-12 18:00:18.506  INFO 18532 --- [RMI TCP Connection(2)-192.168.1.33] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2021-09-12 18:20:31.027  INFO 18532 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-09-12 18:20:31.070  INFO 18532 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-09-12 18:20:31.142  INFO 18532 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
