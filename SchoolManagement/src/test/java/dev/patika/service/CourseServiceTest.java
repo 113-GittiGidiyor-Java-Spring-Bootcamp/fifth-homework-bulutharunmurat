@@ -1,15 +1,19 @@
 package dev.patika.service;
 
 import dev.patika.datatransferobject.CourseDTO;
+import dev.patika.datatransferobject.PermanentInstructorDTO;
 import dev.patika.datatransferobject.StudentDTO;
 import dev.patika.entity.Course;
 import dev.patika.entity.Student;
+import dev.patika.exceptions.CourseIsAlreadyExistException;
+import dev.patika.exceptions.InstructorIsAlreadyExistException;
 import dev.patika.mappers.CourseMapper;
 import dev.patika.mappers.StudentMapper;
 import dev.patika.repository.CourseRepository;
 import dev.patika.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -73,6 +77,17 @@ class CourseServiceTest {
                 ()-> assertNotNull(actual),
                 ()-> assertEquals(expected, actual)
         );
+    }
+
+    @Test
+    void saveCourseWithExistingCode() {
+        //given
+        CourseDTO courseDTO = new CourseDTO();
+        courseDTO.setCode("MATH101");
+        when(mockCourseRepository.selectExistsCode(anyString())).thenReturn(true);
+        Executable executable = ()-> this.courseService.save(courseDTO);
+        //then
+        assertThrows(CourseIsAlreadyExistException.class, executable);
     }
 
     @Test

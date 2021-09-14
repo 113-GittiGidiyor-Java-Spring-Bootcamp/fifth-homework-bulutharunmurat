@@ -1,17 +1,21 @@
 package dev.patika.service;
 
 import dev.patika.datatransferobject.InstructorDTO;
+import dev.patika.datatransferobject.PermanentInstructorDTO;
 import dev.patika.datatransferobject.StudentDTO;
 import dev.patika.entity.Instructor;
 import dev.patika.entity.PermanentInstructor;
 import dev.patika.entity.Student;
 import dev.patika.entity.VisitingResearcher;
+import dev.patika.exceptions.InstructorIsAlreadyExistException;
+import dev.patika.exceptions.StudentAgeNotValidException;
 import dev.patika.mappers.InstructorMapper;
 import dev.patika.mappers.StudentMapper;
 import dev.patika.repository.InstructorRepository;
 import dev.patika.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -72,6 +76,17 @@ class InstructorServiceTest {
                 ()-> assertNotNull(actual),
                 ()-> assertEquals(expexted, actual)
         );
+    }
+
+    @Test
+    void saveExistingPhoneNumber() {
+        //given
+        PermanentInstructorDTO instructorDTO = new PermanentInstructorDTO();
+        instructorDTO.setPhoneNumber("05314054416");
+        when(mockInstructorRepository.selectExistsPhoneNumber(anyString())).thenReturn(true);
+        Executable executable = ()-> this.instructorService.savePermanentInstructor(instructorDTO);
+        //then
+        assertThrows(InstructorIsAlreadyExistException.class, executable);
     }
 
     @Test
