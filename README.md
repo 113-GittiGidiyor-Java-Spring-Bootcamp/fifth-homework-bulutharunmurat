@@ -130,7 +130,7 @@ public static Logger logger = Logger.getLogger(StudentService.class);
   }
   ```
   
-##CLIENT REQUEST INFO class added to project:
+## CLIENT REQUEST INFO class added to project:
 
 With that class changes on Instructor Salary can be logged to database.
   ```  
