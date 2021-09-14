@@ -56,7 +56,7 @@ public class StudentController {
     }
 
     @GetMapping("/getGenderWithGrouping")
-    public List<?> getAgesWithGrouping(){
+    public List<?> getGenderWithGrouping(){
         return studentService.getGenderWithGrouping();
     }
 

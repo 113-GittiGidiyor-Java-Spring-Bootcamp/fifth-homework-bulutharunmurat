@@ -10,6 +10,9 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -100,8 +103,6 @@ class StudentControllerTest {
         //given
         String expected = "student with " + 1 + " id deleted";
         //when
-
-        StudentDTO studentDTO = new StudentDTO();
         String actual = this.studentController.deleteStudentById(1);
 
         //then
@@ -114,7 +115,6 @@ class StudentControllerTest {
         when(mockStudentService.getNumberOfStudents()).thenReturn(20);
 
         //when
-        StudentDTO studentDTO = new StudentDTO();
         String actual = this.studentController.getNumberOfStudents();
 
         //then
@@ -123,7 +123,7 @@ class StudentControllerTest {
     }
 
     @Test
-    void getAgesWithGrouping() {
+    void getGenderWithGrouping() {
     }
 
     @Test
@@ -132,13 +132,46 @@ class StudentControllerTest {
 
     @Test
     void getStudentWithName() {
+
+        //given
+        List<Student> expected = new ArrayList<>();
+        when(mockStudentService.getStudentWithName(anyString())).thenReturn(expected);
+
+        //when
+        List<Student> actual = this.studentController.getStudentWithName("Murat");
+
+        //then
+        assertAll(
+                ()-> assertNotNull(actual),
+                ()-> assertEquals(expected, actual)
+        );
     }
 
     @Test
     void findByNameContaining() {
+        //given
+        List<Student> expected = new ArrayList<>();
+        when(mockStudentService.findByNameContaining(anyString())).thenReturn(expected);
+
+        //when
+        List<Student> actual = this.studentController.findByNameContaining("a");
+
+        //then
+        assertAll(
+                ()-> assertNotNull(actual),
+                ()-> assertEquals(expected, actual)
+        );
     }
 
     @Test
     void deleteStudentByName() {
+        //given
+        String expected = "student with name " + "Murat" + " is deleted";
+        //when
+
+        String actual = this.studentController.deleteStudentByName("Murat");
+
+        //then
+        assertEquals(expected, actual);
     }
 }

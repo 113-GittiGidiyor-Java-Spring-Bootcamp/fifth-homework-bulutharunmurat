@@ -12,10 +12,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,6 +38,18 @@ class StudentServiceTest {
 
     @Test
     void findById() {
+        //given
+        Student expexted = new Student();
+        when(mockStudentRepository.findById(anyInt())).thenReturn(java.util.Optional.of(expexted));
+
+        //when
+        Student actual = this.studentService.findById(1);
+
+        //then
+        assertAll(
+                ()-> assertNotNull(actual),
+                ()-> assertEquals(expexted, actual)
+        );
     }
 
     @Test
@@ -105,7 +120,6 @@ class StudentServiceTest {
 
     @Test
     void deleteById() {
-        //pass
     }
 
     @Test
@@ -122,14 +136,30 @@ class StudentServiceTest {
 
     @Test
     void getStudentWithName() {
+
+        List<Student> expected = new ArrayList<>();
+        when(mockStudentRepository.findByName(anyString())).thenReturn(expected);
+
+
+        List<Student> actual = this.studentService.getStudentWithName("Murat");
+
+        assertEquals(expected, actual);
     }
 
     @Test
     void findByNameContaining() {
+        List<Student> expected = new ArrayList<>();
+        when(mockStudentRepository.findByNameContaining(anyString())).thenReturn(expected);
+
+
+        List<Student> actual = this.studentService.findByNameContaining("a");
+
+        assertEquals(expected, actual);
     }
 
     @Test
     void deleteByName() {
+
     }
 
     @Test
